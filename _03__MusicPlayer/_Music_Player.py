@@ -283,10 +283,14 @@ class App(Tk):
     def _initialize_playlist(self):
         path = os.getcwd() + '/_03__MusicPlayer/Playlist'
         for file in os.listdir(path):
-            name = os.path.splitext(file)[0]
-            self._playlist_paths[name] = path + '/' + file
-            self._playlist_box.insert('end', name)
-        
+            name, extenstion = os.path.splitext(file)
+            if(self._valid_extension(extenstion)):
+                self._playlist_paths[name] = path + '/' + file
+                self._playlist_box.insert('end', name)
+    
+    def _valid_extension(self, extension):
+        return extension == '.mp3'
+
 
 if __name__ == '__main__':
     app = App()
